@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    cursor: none; /* Hide the default cursor */
+}
+
+canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 80%;
+    height: 80%; */
+    background-color: white; /* Background color of the canvas */
+    border: 2px solid blue;
+}
+
+.cursor {
+    position: absolute;
+    width: 20px; /* Size of the custom cursor */
+    height: 20px;
+    border-radius: 50%; /* Make it circular */
+    background-color: black; /* Color of the cursor */
+    pointer-events: none; /* Prevent the cursor from interfering with clicks */
+}
