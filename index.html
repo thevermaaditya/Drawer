@@ -7,10 +7,21 @@
     <title>Custom Cursor Drawing</title>
 </head>
 <body>
+    <!--canvas to draw strokes upon-->
     <canvas id="drawingCanvas"></canvas>
+    
+    <!--cursor used to draw strokes-->
     <div class="cursor"></div>
-    <button id="eraserButton">Toggle Eraser</button>
+    
+    <div class="togler">
+        <!--button to switch between drawing or erasing-->
+        <button id="eraserButton">Toggle Eraser</button>
+        <br>
+        <!-- <label for="cursorSizer"> Change Cursor Size</label> -->
+        <input type="range" name="cursorSizer" id="cursorSizer" min="1" max="100" value="5">
 
+    </div>
+    <button class="clearButton">clear all</button>
     <script src="index.js"></script>
 </body>
 </html>

@@ -1,25 +1,80 @@
+
 * {
     margin: 0;
     padding: 0;
-    cursor: none; /* Hide the default cursor */
+    cursor: none; /*Hide the default cursor */
 }
+
+body{
+    background-color: #2A3335;
+}
+
 
 canvas {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* width: 80%;
-    height: 80%; */
-    background-color: white; /* Background color of the canvas */
-    border: 2px solid blue;
+    border-radius: 1rem;
+    background-color: #FEF9F2; /* Background color of the canvas */
+    border: none;
+    box-shadow: 4px 4px 100px black;
 }
 
 .cursor {
     position: absolute;
-    width: 20px; /* Size of the custom cursor */
-    height: 20px;
+    width: 5px; /* Size of the custom cursor */
+    height: 5px;
+    border: 2px solid #FEF9F2;
     border-radius: 50%; /* Make it circular */
-    background-color: black; /* Color of the cursor */
+    background-color: #2A3335 ; /* Color of the cursor */
     pointer-events: none; /* Prevent the cursor from interfering with clicks */
+    z-index: 10; /* Ensure the cursor is above other elements */
+}
+
+.togler{
+    /* position: absolute; */
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    /* background-color: green; */
+    position: absolute;
+    top: 3.5%;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 200px;
+    flex-direction: column;
+}
+
+#eraserButton{
+    font-family:cursive;
+    font-weight: bolder;
+    font-size: large;
+    height: 2.5rem;
+    width: 15rem;
+    cursor: pointer;
+    /* border: none; */
+    background-color: burlywood;
+    /* -webkit-text-stroke: 1px red; */
+    /* color: transparent; */
+    border-radius: 10px;
+}
+#cursorSizer{
+    position: absolute;
+    top: 70%;
+    width: 15rem;
+    cursor: pointer;
+}
+
+.clearButton{
+    position: absolute;
+    cursor: pointer;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 5px;
+    height: 2rem;
+    width: 5rem;
+    font-family:cursive;
+    background-color: burlywood;
 }
