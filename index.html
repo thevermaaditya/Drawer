@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Custom Cursor Drawing</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!--canvas to draw strokes upon-->
     <canvas id="drawingCanvas"></canvas>
-    
+    <!--Grid Layer-->
+    <canvas id="grid"></canvas>
+
     <!--cursor used to draw strokes-->
     <div class="cursor"></div>
     
@@ -21,7 +24,21 @@
         <input type="range" name="cursorSizer" id="cursorSizer" min="1" max="100" value="5">
 
     </div>
+    
+    <!-- <div ></div> -->
     <button class="clearButton">clear all</button>
-    <script src="index.js"></script>
+
+    <div id="downloadFeature">
+        <label for="formatSelect">Choose format:</label>
+        <!-- <br> -->
+        <select id="formatSelect">
+            <option value="png">PNG</option>
+            <option value="pdf">PDF</option>
+        </select>
+        <br>
+        <button id="downloadButton">Download</button>
+    </div>
+
+    <script type="module" src="index.js"></script>
 </body>
 </html>

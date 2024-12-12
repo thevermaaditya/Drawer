@@ -8,6 +8,22 @@ const eraserRadius = 10; // to define the radius for the eraser
 const cursorSizer = document.getElementById("cursorSizer");
 const clearButton = document.querySelector(".clearButton");//button to clear the canvas on a single click
 
+const downloadButton = document.getElementById('downloadButton'); //download button
+const formatSelect = document.getElementById('formatSelect'); //download format
+
+// to set canvas dimensions
+canvas.width = window.innerWidth-270;
+canvas.height = window.innerHeight - 15;
+//**************************************************************************** */
+const gridLayer = document.getElementById("grid");
+const ctxGrid = gridLayer.getContext('2d');
+// to set grid canvas dimensions
+gridLayer.width = window.innerWidth-270;
+gridLayer.height = window.innerHeight-15;
+//**************************************************************************** */
+
+
+
 //function to load the canvas in same state as it was before page refresh
 function loadCanvas() {
     const savedCanvas = localStorage.getItem('canvasData');
@@ -18,6 +34,7 @@ function loadCanvas() {
             ctx.drawImage(img, 0, 0);
         };
     }
+    // drawGrid();
 }
 
 // function to save canvas data to local storage
@@ -26,23 +43,22 @@ function saveCanvas() {
     localStorage.setItem('canvasData', canvasData);
 }
 
-// function to erase everything on canvas at once
+// clear all --> function to erase everything on canvas at once
 clearButton.addEventListener('click', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     saveCanvas();
 });
 
 
-// to set canvas dimensions
-canvas.width = window.innerWidth - 200;
-canvas.height = window.innerHeight - 200;
+
 // to resice the cursor
 function cursorReSizeinator() {
     cursor.style.width = cursorSizer.value + 'px';
     cursor.style.height = cursorSizer.value + 'px';
     // eraserRadius = cursorSizer.value;
 }
-//to make cursor change size everytime range is changed
+
+//cursor size --> to make cursor change size everytime range is changed
 cursorSizer.addEventListener('input', cursorReSizeinator);
 //to resizethe cursor at start
 cursorReSizeinator();
@@ -73,7 +89,7 @@ function updateCursorPosition(e) {
 
             // to draw line to the current position
             ctx.lineTo(mouseX, mouseY);
-            // to render the stroke 
+            // to render the stroke
             ctx.stroke();
             // to begin a new path
             ctx.beginPath();
@@ -127,10 +143,18 @@ eraserButton.addEventListener('click', () => {
 });
 
 // to handle window resize to maintain canvas size
+// window.addEventListener('resize', () => {
+//     canvas.width = window.innerWidth - 150;
+//     canvas.height = window.innerHeight - 150;
+// });
 window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth - 150;
-    canvas.height = window.innerHeight - 150;
+    canvas.width = canvasContainer.clientWidth-270; // Update canvas width
+    canvas.height = canvasContainer.clientHeight-15; // Update canvas height
+    gridLayer.width = canvasContainer.clientWidth-270; // Update grid layer width
+    gridLayer.height = canvasContainer.clientHeight-15; // Update grid layer height
 });
+
+
 
 // to prevent default touch actions to avoid scrolling on touch devices
 canvas.addEventListener('touchstart', (e) => {
@@ -142,3 +166,54 @@ canvas.addEventListener('touchmove', (e) => {
 
 // Loading canvas data to not let user loos it on a refresh
 window.addEventListener('load', loadCanvas);
+
+
+//-----------------------------------------------Grid options-----------------------------------------------
+const gridSize = 5; // pixels
+const gridColor = '#aaa'; // light gray
+const gridStyle = 'solid'; // solid, dashed, or dotted
+
+// Function to draw the grid
+function drawGrid() {
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+
+  // Draw horizontal grid lines
+  for (let y = 0; y <= canvasHeight; y += gridSize) {
+    ctxGrid.beginPath();
+    ctxGrid.strokeStyle = gridColor;
+    ctxGrid.lineWidth = 1;
+    ctxGrid.moveTo(0, y);
+    ctxGrid.lineTo(canvasWidth, y);
+    ctxGrid.stroke();
+  }
+
+  // Draw vertical grid lines
+  for (let x = 0; x <= canvasWidth; x += gridSize) {
+    ctxGrid.beginPath();
+    ctxGrid.strokeStyle = gridColor;
+    ctxGrid.lineWidth = 0;
+    ctxGrid.moveTo(x, 0);
+    ctxGrid.lineTo(x, canvasHeight);
+    ctxGrid.stroke();
+  }
+}
+
+// Call the drawGrid function to draw the grid
+drawGrid();
+//----------------------download feature---------------------
+downloadButton.addEventListener('click', () => {
+    const format = formatSelect.value; // Get selected format
+    if (format === 'png') {
+        const link = document.createElement('a'); // Create an anchor element
+        link.download = 'canvas-image.png'; // Set the name for the downloaded file
+        link.href = canvas.toDataURL('image/png'); // Convert canvas to data URL
+        link.click(); // Trigger the download
+    } else if (format === 'pdf') {
+        const { jsPDF } = window.jspdf; // Get jsPDF from the global window object
+        const pdf = new jsPDF();
+        const imgData = canvas.toDataURL('image/png'); // Convert canvas to data URL
+        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width / 10, canvas.height / 10); // Add image to PDF
+        pdf.save('canvas-image.pdf'); // Save the PDF
+    }
+});
