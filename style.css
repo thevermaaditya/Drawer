@@ -10,10 +10,12 @@ body{
 }
 
 
+
+
 canvas {
     position: absolute;
     top: 50%;
-    left: 54%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
 }
@@ -21,7 +23,7 @@ canvas {
 #grid{
     position: absolute;
     top: 50%;
-    left: 54%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background-color: #FEF9F2;
     border-radius: 0.2rem;

@@ -12,14 +12,16 @@ const downloadButton = document.getElementById('downloadButton'); //download but
 const formatSelect = document.getElementById('formatSelect'); //download format
 
 // to set canvas dimensions
-canvas.width = window.innerWidth-140;
-canvas.height = window.innerHeight - 50;
+let canvasHeight = window.innerHeight;
+let canvasWidth = window.innerWidth;
+canvas.width = canvasWidth;//-140;
+canvas.height = canvasHeight;// - 50;
 //**************************************************************************** */
 const gridLayer = document.getElementById("grid");
 const ctxGrid = gridLayer.getContext('2d');
 // to set grid canvas dimensions
-gridLayer.width = window.innerWidth-140;
-gridLayer.height = window.innerHeight-50;
+gridLayer.width = canvasWidth;//-140;
+gridLayer.height = canvasHeight;//-50;
 //**************************************************************************** */
 
 
@@ -181,8 +183,8 @@ const gridStyle = 'solid'; // solid, dashed, or dotted
 
 // Function to draw the grid
 function drawGrid() {
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
+//   const canvasWidth = canvas.width;
+//   const canvasHeight = canvas.height;
 
   // Draw horizontal grid lines
   for (let y = 0; y <= canvasHeight; y += gridSize) {
@@ -223,3 +225,48 @@ downloadButton.addEventListener('click', () => {
         pdf.save('canvas-image.pdf'); // Save the PDF
     }
 });
+
+//---------------infinit scrolling---------------
+
+document.addEventListener("wheel", (event) => {
+    // event.preventDefault(); // Prevent default scrolling behavior
+
+    if (event.deltaY > 0) {
+        // Save the current canvas state
+        const currentCanvasData = canvas.toDataURL();
+
+        // Increase the height of the canvas and grid layer
+        canvasHeight += Math.ceil(event.deltaY); // Increment the height based on deltaY
+        canvas.height = canvasHeight; // Set the new height for the canvas
+        gridLayer.height = canvasHeight; // Set the new height for the grid layer
+
+        // Redraw the saved canvas state
+        const img = new Image();
+        img.src = currentCanvasData;
+        img.onload = () => {
+            ctx.drawImage(img, 0, 0); // Draw the saved canvas state back onto the canvas
+        };
+
+        drawGrid(); // Redraw the grid
+        console.log("Height increased to:", canvasHeight);
+    }
+});
+
+
+// let lastScrollTop = 0; // Variable to store the last scroll position
+
+// // Add wheel event listener to the window
+// window.addEventListener('wheel', (event) => {
+//     // Check the deltaY property to determine scroll direction
+//     if (event.deltaY < 0) {
+//         // User scrolled up
+//         console.log(`scrolled up`);
+//         // Add your logic for scroll up here
+//     } else if (event.deltaY > 0) {
+//         drawGrid();
+//         canvas.heigth = canvasHeight+Math.floor(event.deltaY);
+//         gridLayer.height = canvasHeight+Math.floor(event.deltaY);
+//         console.log(`Scrolled Down`);
+//         // Add your logic for scroll down here
+//     }
+// });
