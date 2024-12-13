@@ -12,14 +12,14 @@ const downloadButton = document.getElementById('downloadButton'); //download but
 const formatSelect = document.getElementById('formatSelect'); //download format
 
 // to set canvas dimensions
-canvas.width = window.innerWidth-220;
-canvas.height = window.innerHeight - 15;
+canvas.width = window.innerWidth-140;
+canvas.height = window.innerHeight - 50;
 //**************************************************************************** */
 const gridLayer = document.getElementById("grid");
 const ctxGrid = gridLayer.getContext('2d');
 // to set grid canvas dimensions
-gridLayer.width = window.innerWidth-220;
-gridLayer.height = window.innerHeight-15;
+gridLayer.width = window.innerWidth-140;
+gridLayer.height = window.innerHeight-50;
 //**************************************************************************** */
 
 

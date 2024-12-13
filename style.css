@@ -6,27 +6,23 @@
 }
 
 body{
-    background-color: #2A3335;
+    background-color: palevioletred;/*#2A3335; */
 }
 
 
 canvas {
     position: absolute;
     top: 50%;
-    left: 56%;
+    left: 54%;
     transform: translate(-50%, -50%);
-    background-color: transparent;/* #FEF9F2 Background color of the canvas */
-    /* border: 2px solid white; */
-    /* box-shadow: 4px 4px 100px black; */
+    background-color: transparent;
 }
 
 #grid{
     position: absolute;
     top: 50%;
-    left: 56%;
+    left: 54%;
     transform: translate(-50%, -50%);
-    /* width: 100%;
-    height: 77vh; */
     background-color: #FEF9F2;
     border-radius: 0.2rem;
     z-index: -1;    
@@ -44,16 +40,13 @@ canvas {
 }
 
 .togler{
-    /* position: absolute; */
     display: flex;
     justify-content:center;
     align-items: center;
-    /* background-color: green; */
     position: absolute;
     top: 12%;
-    left: 7%;
+    left: 3%;
     transform: translate(-50%,0);
-    /* width: 200px; */
     flex-direction: column;
 }
 
@@ -86,11 +79,11 @@ canvas {
     position: absolute;
     cursor: pointer;
     top: 22%;
-    left: 7%;
+    left: 3%;
     transform: translate(-50%, 0);
     border-radius: 5px;
-    height: 45px;
-    width: 45px;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     background-color: coral;
 }
@@ -100,7 +93,7 @@ canvas {
 }
 #downloadFeature{
     position: absolute;
-    top: 13%;
+    top: 35%;
     left: 1%;
     width:fit-content;
     font-family: cursive;
@@ -112,18 +105,18 @@ canvas {
     background-color: coral;
     color: white;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 1rem;
     font-family: cursive;
-    height: 40px;
-    width: 55px;
+    height: 2rem;
+    width: 3.5rem;
     font-size: small;
     /* transform: rotate(-90deg); */
 }
 
 #downloadButton{
     position: absolute;
-    top: 225%;
-    left: 50%;
+    top: 45%;
+    left: 160%;
     transform: translate(-50%, -50%);
     font-family: cursive;
     cursor: pointer;
