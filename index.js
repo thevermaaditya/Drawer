@@ -12,13 +12,13 @@ const downloadButton = document.getElementById('downloadButton'); //download but
 const formatSelect = document.getElementById('formatSelect'); //download format
 
 // to set canvas dimensions
-canvas.width = window.innerWidth-270;
+canvas.width = window.innerWidth-220;
 canvas.height = window.innerHeight - 15;
 //**************************************************************************** */
 const gridLayer = document.getElementById("grid");
 const ctxGrid = gridLayer.getContext('2d');
 // to set grid canvas dimensions
-gridLayer.width = window.innerWidth-270;
+gridLayer.width = window.innerWidth-220;
 gridLayer.height = window.innerHeight-15;
 //**************************************************************************** */
 
@@ -135,10 +135,16 @@ eraserButton.addEventListener('click', () => {
 
     if (eraserMode) {
         cursor.style.backgroundColor = 'grey'; // change cursor color to indicate eraser mode
-        eraserButton.textContent = 'Switch to Drawing'; // change button text
+        //to change icons depending upon action, from eraser to pencil
+        let actionIcon = document.getElementById("action-icon");
+        actionIcon.src = "./icons/pencil.png";
+        
     } else {
         cursor.style.backgroundColor = 'black'; // change cursor back to original color
-        eraserButton.textContent = 'Toggle Eraser'; // reset button text
+
+        //to change icons depending upon action, from pencil to eraser
+        let actionIcon = document.getElementById("action-icon");
+        actionIcon.src = "./icons/eraser.png";
     }
 });
 
@@ -168,8 +174,8 @@ canvas.addEventListener('touchmove', (e) => {
 window.addEventListener('load', loadCanvas);
 
 
-//-----------------------------------------------Grid options-----------------------------------------------
-const gridSize = 5; // pixels
+//--------Grid options--------
+const gridSize = 10; // pixels
 const gridColor = '#aaa'; // light gray
 const gridStyle = 'solid'; // solid, dashed, or dotted
 
