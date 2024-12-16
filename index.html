@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Custom Cursor Drawing</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
 </head>
 <body>
     <!-- <div id="canvasContainer"> -->
@@ -18,30 +19,38 @@
     <!--cursor used to draw strokes-->
     <div class="cursor"></div>
     
+    <button id="tool-button"><img src="./icons/tools.png" alt=""></button>
 
-    <div class="togler">
-        <!--button to switch between drawing or erasing-->
-        <button id="eraserButton"><img id="action-icon"src="./icons/eraser.png" alt=""></button>
-        <br>
-        <!-- <label for="cursorSizer"> Change Cursor Size</label> -->
-        <input type="range" name="cursorSizer" id="cursorSizer" min="1" max="100" value="5">
+    <div class="toolsItems">
+        <div class="togler">
+            <!--button to switch between drawing or erasing-->
+            <button id="eraserButton">
+                <img id="action-icon"src="./icons/eraser.png" alt="">
+            </button>
+            <!-- <br> -->
+            <!-- <label for="cursorSizer"> Change Cursor Size</label> -->
+            <input type="range" name="cursorSizer" id="cursorSizer" min="1" max="100" value="10">
 
+        </div>
+
+        <!-- button to clear everythin -->
+        <button class="clearButton"><img src="./icons/reload.png" alt=""></button>
+
+        <div id="downloadFeature">
+            <label for="formatSelect"></label>
+            <!-- <br> -->
+            <select id="formatSelect">
+                <option value="png">PNG</option>
+                <option value="pdf">PDF</option>
+            </select>
+            <br>
+            <button id="downloadButton"><img id="action-icon"src="./icons/download.png" alt=""></button>
+        </div>
     </div>
-    
-    <!-- button to clear everythin -->
-    <button class="clearButton"><img src="./icons/reload.png" alt=""></button>
 
-    <div id="downloadFeature">
-        <label for="formatSelect"></label>
-        <!-- <br> -->
-        <select id="formatSelect">
-            <option value="png">PNG</option>
-            <option value="pdf">PDF</option>
-        </select>
-        <br>
-        <button id="downloadButton"><img id="action-icon"src="./icons/download.png" alt=""></button>
-    </div>
-
+    <!-- <script src="scales.js"></script> -->
     <script type="module" src="index.js"></script>
+
+    <script src="tools.js"></script>
 </body>
 </html>

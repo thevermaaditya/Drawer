@@ -150,16 +150,12 @@ eraserButton.addEventListener('click', () => {
     }
 });
 
-// to handle window resize to maintain canvas size
-// window.addEventListener('resize', () => {
-//     canvas.width = window.innerWidth - 150;
-//     canvas.height = window.innerHeight - 150;
-// });
 window.addEventListener('resize', () => {
-    canvas.width = canvasContainer.clientWidth-270; // Update canvas width
-    canvas.height = canvasContainer.clientHeight-15; // Update canvas height
-    gridLayer.width = canvasContainer.clientWidth-270; // Update grid layer width
-    gridLayer.height = canvasContainer.clientHeight-15; // Update grid layer height
+    canvas.width = canvasWidth//canvasContainer.clientWidth-270; // Update canvas width
+    canvas.height = canvasHeight//canvasContainer.clientHeight-15; // Update canvas height
+    gridLayer.width = canvasWidth//canvasContainer.clientWidth-270; // Update grid layer width
+    gridLayer.height = canvasHeight//canvasContainer.clientHeight-15; // Update grid layer height
+    drawGrid();
 });
 
 
@@ -172,7 +168,7 @@ canvas.addEventListener('touchmove', (e) => {
     e.preventDefault();
 });
 
-// Loading canvas data to not let user loos it on a refresh
+// Loading canvas data to not let user loose it on a refresh
 window.addEventListener('load', loadCanvas);
 
 
@@ -183,9 +179,6 @@ const gridStyle = 'solid'; // solid, dashed, or dotted
 
 // Function to draw the grid
 function drawGrid() {
-//   const canvasWidth = canvas.width;
-//   const canvasHeight = canvas.height;
-
   // Draw horizontal grid lines
   for (let y = 0; y <= canvasHeight; y += gridSize) {
     ctxGrid.beginPath();
@@ -207,7 +200,7 @@ function drawGrid() {
   }
 }
 
-// Call the drawGrid function to draw the grid
+// Calling drawGrid function to draw the grid
 drawGrid();
 //----------------------download feature---------------------
 downloadButton.addEventListener('click', () => {
@@ -228,45 +221,30 @@ downloadButton.addEventListener('click', () => {
 
 //---------------infinit scrolling---------------
 
-document.addEventListener("wheel", (event) => {
-    // event.preventDefault(); // Prevent default scrolling behavior
+// document.addEventListener("wheel", (event) => {
+//     // Prevent default scrolling behavior
+//     event.preventDefault();
 
-    if (event.deltaY > 0) {
-        // Save the current canvas state
-        const currentCanvasData = canvas.toDataURL();
+//     // Save the current canvas state
+//     const currentCanvasData = canvas.toDataURL();
 
-        // Increase the height of the canvas and grid layer
-        canvasHeight += Math.ceil(event.deltaY); // Increment the height based on deltaY
-        canvas.height = canvasHeight; // Set the new height for the canvas
-        gridLayer.height = canvasHeight; // Set the new height for the grid layer
-
-        // Redraw the saved canvas state
-        const img = new Image();
-        img.src = currentCanvasData;
-        img.onload = () => {
-            ctx.drawImage(img, 0, 0); // Draw the saved canvas state back onto the canvas
-        };
-
-        drawGrid(); // Redraw the grid
-        console.log("Height increased to:", canvasHeight);
-    }
-});
-
-
-// let lastScrollTop = 0; // Variable to store the last scroll position
-
-// // Add wheel event listener to the window
-// window.addEventListener('wheel', (event) => {
-//     // Check the deltaY property to determine scroll direction
-//     if (event.deltaY < 0) {
-//         // User scrolled up
-//         console.log(`scrolled up`);
-//         // Add your logic for scroll up here
-//     } else if (event.deltaY > 0) {
-//         drawGrid();
-//         canvas.heigth = canvasHeight+Math.floor(event.deltaY);
-//         gridLayer.height = canvasHeight+Math.floor(event.deltaY);
-//         console.log(`Scrolled Down`);
-//         // Add your logic for scroll down here
+//     if (event.deltaY > 0) {
+//         // Scrolling down
+//         canvasHeight += Math.ceil(event.deltaY); // Increment the height based on deltaY
 //     }
+
+
+//     // Set the new height for the canvas and grid layer
+//     canvas.height = canvasHeight;
+//     gridLayer.height = canvasHeight;
+
+//     // Redraw the saved canvas state
+//     const img = new Image();
+//     img.src = currentCanvasData;
+//     img.onload = () => {
+//         ctx.drawImage(img, 0, 0); // Draw the saved canvas state back onto the canvas
+//     };
+
+//     drawGrid(); // Redraw the grid
+//     console.log("Canvas height adjusted to:", canvasHeight);
 // });

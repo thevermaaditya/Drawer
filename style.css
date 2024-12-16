@@ -1,139 +1,170 @@
-
 * {
     margin: 0;
     padding: 0;
-    /* cursor: none; Hide the default cursor */
+    box-sizing: border-box; /* Ensures padding and borders are included in element's total width and height */
 }
 
-body{
-    background-color: palevioletred;/*#2A3335; */
+body {
+    background-color: #f0f0f0; /* Light background for better contrast */
+    font-family: Arial, sans-serif; /* Use a clean font */
 }
-
-
-
 
 canvas {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: transparent;
+    background-color: transparent; /* Keep the canvas background transparent */
+    border: 1px solid #ccc; /* Add a subtle border to the canvas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow for depth */
 }
 
-#grid{
+#grid {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #FEF9F2;
-    border-radius: 0.2rem;
-    z-index: -1;    
+    background-color: transparent; /* Keep the grid background transparent */
+    z-index: -1; /* Ensure the grid is behind the drawing canvas */
 }
 
 .cursor {
     position: absolute;
-    width: 5px; /* Size of the custom cursor */
-    height: 5px;
+    width: 10px; /* Increased size for better visibility */
+    height: 10px;
     border: 2px solid #FEF9F2;
     border-radius: 50%; /* Make it circular */
-    background-color: #2A3335 ; /* Color of the cursor */
+    background-color: #2A3335; /* Color of the cursor */
     pointer-events: none; /* Prevent the cursor from interfering with clicks */
     z-index: 10; /* Ensure the cursor is above other elements */
 }
 
-.togler{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    position: absolute;
-    top: 12%;
-    left: 3%;
-    transform: translate(-50%,0);
-    flex-direction: column;
+button {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: none; /* Remove default button border */
+    border-radius: 5px; /* Rounded corners for buttons */
+    background-color: coral; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px; /* Padding for buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-#eraserButton{
-    height: 3rem;
-    width: 3rem;
-    /* font-family:cursive;
-    font-weight: bolder;
-    font-size: large;
-    cursor: pointer;
-    border-radius: 10px; */
-    background-color: coral;
-    border-radius: 50%;
-    /* filter: hue-rotate(90deg); */
+button:hover {
+    background-color: #ff7f50; /* Darker coral on hover */
 }
-#eraserButton > img{
-    height: 25px;
-    width: 25px;
-    
+
+.clearButton, #eraserButton {
+    width: 50px; /* Set a consistent size for buttons */
+    height: 50px;
 }
-#cursorSizer{
+
+.clearButton img, #eraserButton img, #downloadButton img {
+    width: 30px; /* Set icon size */
+    height: 30px;
+}
+
+/* #cursorSizer {
     position: absolute;
-    top: 72%;
-    left: 40%;
+    transform: rotate(-90deg);
     cursor: pointer;
+    width: 5rem;
+    margin-bottom: 10%;
+} */
+#cursorSizer {
+    -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+    appearance: none; /* Remove default styling */
+    width: 100px; /* Adjust width as needed */
+    height: 2px; /* Height of the track */
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for the track */
+    border-radius: 5px; /* Rounded corners for the track */
+    outline: none; /* Remove outline on focus */
+    cursor: pointer; /* Change cursor to pointer */
+    margin: -10px 0; /* Add margin for spacing */
     transform: rotate(-90deg);
 }
 
-.clearButton{
-    position: absolute;
-    cursor: pointer;
-    top: 22%;
-    left: 3%;
-    transform: translate(-50%, 0);
-    border-radius: 5px;
-    height: 3rem;
-    width: 3rem;
-    border-radius: 50%;
-    background-color: coral;
-}
-.clearButton > img{
-    height: 30px;
-    width: 30px;
-}
-#downloadFeature{
-    position: absolute;
-    top: 35%;
-    left: 1%;
-    width:fit-content;
-    font-family: cursive;
-    color: coral;
-    cursor: pointer;
+/* Style the thumb (the draggable part) */
+#cursorSizer::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none; /* Remove default styling */
+    width: 20px; /* Width of the thumb */
+    height: 20px; /* Height of the thumb */
+    border-radius: 50%; /* Make it circular */
+    background: #2A3335; /* Color of the thumb */
+    cursor: pointer; /* Change cursor to pointer */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for depth */
 }
 
-#formatSelect{
+#cursorSizer::-moz-range-thumb {
+    width: 20px; /* Width of the thumb */
+    height: 20px; /* Height of the thumb */
+    border-radius: 50%; /* Make it circular */
+    background: #2A3335; /* Color of the thumb */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Style the track for Firefox */
+#cursorSizer::-moz-range-track {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for the track */
+    border-radius: 0px; /* Rounded corners for the track */
+}
+
+/* Style the track for WebKit browsers */
+#cursorSizer::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent background for the track */
+    /* height: 50px; */
+    border-radius: 0px; /* Rounded corners for the track */
+}
+
+
+/*--------------------------------------*/
+.toolsItems {
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: center; */
+    row-gap: 0; 
+    column-gap: 5px;
+    position: absolute;
+    top: 1%;
+    left: 5rem;
+    visibility: hidden;
+    background-color: gray;
+    padding: 20px; 
+    border-radius: 0.3rem;
+}
+
+#downloadFeature {
+    display: flex; /* Use flexbox for layout */
+    /* align-items: center; Center items vertically */
+    border: 0.1em solid lightgray;
+    border-radius: 5px;
+}
+
+#formatSelect {
     background-color: coral;
     color: white;
-    border: 2px solid black;
-    border-radius: 1rem;
-    font-family: cursive;
-    height: 2rem;
-    width: 3.5rem;
-    font-size: small;
-    /* transform: rotate(-90deg); */
+    border: 2px solid transparent;
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px; /* Padding for select */
+    margin: 2px; /* Space between select and button */
 }
 
-#downloadButton{
+#downloadButton {
+    width: 50px; /* Set a consistent size for download button */
+    height: 50px;
+    margin: 2px; /* Space between select and button */
+}
+
+#tool-button {
     position: absolute;
-    top: 45%;
-    left: 160%;
-    transform: translate(-50%, -50%);
-    font-family: cursive;
-    cursor: pointer;
-    background-color: coral;
-    /* color: coral; */
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid black outset;
-    /* box-shadow: 0px 0px 10px #FEF9F2; */
+    left: 1px;
+    height: 50px; /* Increased size for better visibility */
+    width: 50px;
+    border-radius: 10%;
+    background-color: transparent;
 }
 
-#downloadButton > img{
+#tool-button img {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    
 }
