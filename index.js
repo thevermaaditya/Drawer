@@ -13,7 +13,7 @@ const formatSelect = document.getElementById('formatSelect'); //download format
 
 // to set canvas dimensions
 let canvasHeight = window.innerHeight;
-let canvasWidth = window.innerWidth;
+let canvasWidth = window.innerWidth - 270;
 canvas.width = canvasWidth;//-140;
 canvas.height = canvasHeight;// - 50;
 //**************************************************************************** */
@@ -140,7 +140,7 @@ eraserButton.addEventListener('click', () => {
         //to change icons depending upon action, from eraser to pencil
         let actionIcon = document.getElementById("action-icon");
         actionIcon.src = "./icons/pencil.png";
-        
+
     } else {
         cursor.style.backgroundColor = 'black'; // change cursor back to original color
 
@@ -169,35 +169,38 @@ canvas.addEventListener('touchmove', (e) => {
 });
 
 // Loading canvas data to not let user loose it on a refresh
-window.addEventListener('load', loadCanvas);
+window.addEventListener('load', () => {
+    loadCanvas();
+    alert("On refreshing the window you may be left with only data of you latest page")
+});
 
 
 //--------Grid options--------
-const gridSize = 10; // pixels
-const gridColor = '#aaa'; // light gray
+const gridSize = 20; // pixels
+const gridColor = '#000'; // light gray
 const gridStyle = 'solid'; // solid, dashed, or dotted
 
 // Function to draw the grid
 function drawGrid() {
-  // Draw horizontal grid lines
-  for (let y = 0; y <= canvasHeight; y += gridSize) {
-    ctxGrid.beginPath();
-    ctxGrid.strokeStyle = gridColor;
-    ctxGrid.lineWidth = 1;
-    ctxGrid.moveTo(0, y);
-    ctxGrid.lineTo(canvasWidth, y);
-    ctxGrid.stroke();
-  }
+    // Draw horizontal grid lines
+    for (let y = 0; y <= canvasHeight; y += gridSize) {
+        ctxGrid.beginPath();
+        ctxGrid.strokeStyle = gridColor;
+        ctxGrid.lineWidth = 1;
+        ctxGrid.moveTo(0, y);
+        ctxGrid.lineTo(canvasWidth, y);
+        ctxGrid.stroke();
+    }
 
-  // Draw vertical grid lines
-  for (let x = 0; x <= canvasWidth; x += gridSize) {
-    ctxGrid.beginPath();
-    ctxGrid.strokeStyle = gridColor;
-    ctxGrid.lineWidth = 0;
-    ctxGrid.moveTo(x, 0);
-    ctxGrid.lineTo(x, canvasHeight);
-    ctxGrid.stroke();
-  }
+    // Draw vertical grid lines
+    for (let x = 0; x <= canvasWidth; x += gridSize) {
+        ctxGrid.beginPath();
+        ctxGrid.strokeStyle = gridColor;
+        ctxGrid.lineWidth = 0;
+        ctxGrid.moveTo(x, 0);
+        ctxGrid.lineTo(x, canvasHeight);
+        ctxGrid.stroke();
+    }
 }
 
 // Calling drawGrid function to draw the grid
